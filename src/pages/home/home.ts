@@ -39,7 +39,13 @@ export class HomePage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    this.currentTime = this.calculateTime('-6');
 
+
+    // If it is Daylight Savings Time
+    if (this.dst(new Date())) {
+      this.currentTime = this.calculateTime('-5');
+    }
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
